@@ -3,13 +3,13 @@ VERSION:2.0
 PRODID:-//TRIZ//seller-content-calendar//KO
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:예시 콘텐츠 캘린더
+X-WR-CALNAME:트리즈 예시 캘린더
 X-WR-TIMEZONE:Asia/Seoul
 REFRESH-INTERVAL;VALUE=DURATION:PT1H
 X-PUBLISHED-TTL:PT1H
 BEGIN:VEVENT
 UID:day-2026-11-03@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261103
 DTEND;VALUE=DATE:20261104
 SUMMARY:[핸드 워시 1차 D-2] 릴스 · 손 씻기 싫어하는 아이 
@@ -28,7 +28,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-05@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261105
 DTEND;VALUE=DATE:20261106
 SUMMARY:[핸드 워시 1차 오픈] 피드 · 오픈 안내
@@ -44,24 +44,24 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-16@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
-SUMMARY:예시님 스토리 1개
+SUMMARY:트리즈님 스토리 1개
 TRANSP:TRANSPARENT
-DESCRIPTION:• [보습 크림 2차 D-7] 스토리 · 건조한 아침\, 
- 세안 후 당기는 볼을 만지며 한숨 쉬는 모습\n\n앱에서 
- 보기: https://trizcommerce.github.io/example/
+DESCRIPTION:• [보습 크림 2차 D-7] 스토리 · 제품 사전 노출
+  ① 건조한 아침\n\n앱에서 보기: https://trizcommerce.github.io
+ /example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:예시님 스토리 1개
+DESCRIPTION:트리즈님 스토리 1개
 TRIGGER;RELATED=START:PT9H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-18@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:[보습 크림 2차 D-5] 릴스 · 겨울 아침 5분 스킨케어
@@ -80,7 +80,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-20@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:[보습 크림 2차 D-3] 피드 · 건조 피부 Q&A 5가지
@@ -96,52 +96,51 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-22@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261122
 DTEND;VALUE=DATE:20261123
-SUMMARY:예시님 스토리 1개
+SUMMARY:트리즈님 스토리 1개
 TRANSP:TRANSPARENT
-DESCRIPTION:• [보습 크림 2차 D-1] 스토리 · 내일 오전 10시 
- 오픈 안내 + 질문 스티커 '궁금한 점 물어보세요'\n\n앱
- 에서 보기: https://trizcommerce.github.io/example/
+DESCRIPTION:• [보습 크림 2차 D-1] 스토리 · 오픈 하루 전 
+ 안내\n\n앱에서 보기: https://trizcommerce.github.io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:예시님 스토리 1개
+DESCRIPTION:트리즈님 스토리 1개
 TRIGGER;RELATED=START:PT9H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-23@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261124
-SUMMARY:[보습 크림 2차 오픈] 릴스 · 드디어 오픈! 제가 반
- 년 동안 쓴 크림
+SUMMARY:[보습 크림 2차 오픈] 릴스 · 드디어 오픈! 반년 동
+ 안 쓴 크림
 TRANSP:TRANSPARENT
 DESCRIPTION:• [보습 크림 2차 오픈] 릴스 · 드디어 오픈! 
- 제가 반년 동안 쓴 크림\n\n앱에서 보기: https://trizcommerce
- .github.io/example/
+ 반년 동안 쓴 크림\n\n앱에서 보기: https://trizcommerce.github
+ .io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:[보습 크림 2차 오픈] 릴스 · 드디어 오픈! 제가
-  반년 동안 쓴 크림
+DESCRIPTION:[보습 크림 2차 오픈] 릴스 · 드디어 오픈! 반년
+  동안 쓴 크림
 TRIGGER;RELATED=START:PT9H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-25@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:[11월 기획] [릴스] 한 주를 여는 월요일 루틴 · 스
  토리 2
 TRANSP:TRANSPARENT
-DESCRIPTION:• [보습 크림 2차 오픈 후 2일] 스토리 · 실시
- 간 구매 인증 리그램 + 남은 수량 안내\n• [11월 기획] 
- 스토리\n• [11월 기획] [릴스] 한 주를 여는 월요일 루틴
- \n\n앱에서 보기: https://trizcommerce.github.io/example/
+DESCRIPTION:• [보습 크림 2차 오픈 후 2일] 스토리 · 구매 
+ 인증 리그램\n• [11월 기획] 스토리\n• [11월 기획] [릴
+ 스] 한 주를 여는 월요일 루틴\n\n앱에서 보기: https://triz
+ commerce.github.io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -152,32 +151,32 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-26@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
-SUMMARY:예시님 스토리 1개
+SUMMARY:트리즈님 스토리 1개
 TRANSP:TRANSPARENT
 DESCRIPTION:• [11월 기획] 스토리\n\n앱에서 보기: https://triz
  commerce.github.io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:예시님 스토리 1개
+DESCRIPTION:트리즈님 스토리 1개
 TRIGGER;RELATED=START:PT9H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-27@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:[11월 기획] [캐러셀] 10분 만에 끝내는 거실 정리 ·
   스토리 2
 TRANSP:TRANSPARENT
-DESCRIPTION:• [보습 크림 2차 오픈 후 4일] 스토리 · 마감 D
- -0: '오늘 밤 12시 마감' 카운트다운 스티커\n• [11월 기
- 획] 스토리\n• [11월 기획] [캐러셀] 10분 만에 끝내는 거
- 실 정리\n\n앱에서 보기: https://trizcommerce.github.io/example/
+DESCRIPTION:• [보습 크림 2차 오픈 후 4일] 스토리 · 마감 
+ 카운트다운\n• [11월 기획] 스토리\n• [11월 기획] [캐러
+ 셀] 10분 만에 끝내는 거실 정리\n\n앱에서 보기: https://tr
+ izcommerce.github.io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -188,15 +187,14 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-28@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261128
 DTEND;VALUE=DATE:20261129
 SUMMARY:촬영 소품 받기 · 스토리 2
 TRANSP:TRANSPARENT
-DESCRIPTION:• [곡물 그래놀라 1차 D-6] 스토리 · 아침 식탁 
- 위 빈 그릇 사진 + '아침 거르는 분 손!' 투표 스티커\n•
-  [11월 기획] 스토리\n• 촬영 소품 받기\n\n앱에서 보기: 
- https://trizcommerce.github.io/example/
+DESCRIPTION:• [곡물 그래놀라 1차 D-6] 스토리 · 아침 거르
+ 는 사람 손!\n• [11월 기획] 스토리\n• 촬영 소품 받기\n
+ \n앱에서 보기: https://trizcommerce.github.io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -206,45 +204,60 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-29@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
-SUMMARY:[11월 기획] [릴스] 가족과 보내는 토요일 브이로그
-  · 스토리 1
+SUMMARY:[11월 기획] [캐러셀] 무물 모음집 · 스토리 1
 TRANSP:TRANSPARENT
-DESCRIPTION:• [11월 기획] 스토리\n• [11월 기획] [릴스] 가
- 족과 보내는 토요일 브이로그\n\n앱에서 보기: https://triz
- commerce.github.io/example/
+DESCRIPTION:• [11월 기획] 스토리\n• [11월 기획] [캐러셀] 
+ 무물 모음집\n\n앱에서 보기: https://trizcommerce.github.io/exam
+ ple/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:[11월 기획] [릴스] 가족과 보내는 토요일 브이
- 로그 · 스토리 1
+DESCRIPTION:[11월 기획] [캐러셀] 무물 모음집 · 스토리 1
 TRIGGER;RELATED=START:PT9H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-11-30@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:[곡물 그래놀라 1차 D-4] 릴스 · 3분 아침 한 그릇 
- 만들기
+ 외 1 · 스토리 1
 TRANSP:TRANSPARENT
 DESCRIPTION:• [곡물 그래놀라 1차 D-4] 릴스 · 3분 아침 한 
- 그릇 만들기\n\n앱에서 보기: https://trizcommerce.github.io/exam
- ple/
+ 그릇\n• [11월 기획] 스토리\n• [11월 기획] [릴스] 가족
+ 과 보내는 토요일 브이로그\n\n앱에서 보기: https://trizcom
+ merce.github.io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:[곡물 그래놀라 1차 D-4] 릴스 · 3분 아침 한 그
- 릇 만들기
+ 릇 외 1 · 스토리 1
+TRIGGER;RELATED=START:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:day-2026-12-01@cal.trizcommerce
+DTSTAMP:20261125T062008Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:트리즈님 스토리 1개
+TRANSP:TRANSPARENT
+DESCRIPTION:• [11월 기획] 스토리\n\n앱에서 보기: https://triz
+ commerce.github.io/example/
+URL:https://trizcommerce.github.io/example/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:트리즈님 스토리 1개
 TRIGGER;RELATED=START:PT9H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-12-02@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261202
 DTEND;VALUE=DATE:20261203
 SUMMARY:[곡물 그래놀라 1차 D-2] 피드 · 그래놀라 꿀조합 4
@@ -263,7 +276,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-12-04@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261204
 DTEND;VALUE=DATE:20261205
 SUMMARY:[곡물 그래놀라 1차 오픈] 릴스 · 오픈 안내
@@ -279,24 +292,23 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-12-14@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261214
 DTEND;VALUE=DATE:20261215
-SUMMARY:예시님 스토리 1개
+SUMMARY:트리즈님 스토리 1개
 TRANSP:TRANSPARENT
-DESCRIPTION:• [겨울 수면양말 D-3] 스토리 · 퇴근 후 양말 
- 갈아 신고 소파에 눕는 영상 + '발 시려운 사람?' 질문\n\
- n앱에서 보기: https://trizcommerce.github.io/example/
+DESCRIPTION:• [겨울 수면양말 D-3] 스토리 · 발 시려운 사
+ 람?\n\n앱에서 보기: https://trizcommerce.github.io/example/
 URL:https://trizcommerce.github.io/example/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:예시님 스토리 1개
+DESCRIPTION:트리즈님 스토리 1개
 TRIGGER;RELATED=START:PT9H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:day-2026-12-16@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261216
 DTEND;VALUE=DATE:20261217
 SUMMARY:[겨울 수면양말 D-1] 릴스 · 가족 모두 같은 양말 
@@ -315,7 +327,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:period-p보습크림2@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261128
 SUMMARY:🛒 보습 크림 2차 공구
@@ -325,7 +337,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:period-p그래놀라1@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261204
 DTEND;VALUE=DATE:20261208
 SUMMARY:🛒 곡물 그래놀라 1차 공구
@@ -335,7 +347,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:period-p수면양말1@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261217
 DTEND;VALUE=DATE:20261221
 SUMMARY:🛒 겨울 수면양말 공구
@@ -345,7 +357,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:period-p핸드워시1@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261105
 DTEND;VALUE=DATE:20261109
 SUMMARY:🛒 핸드 워시 1차 공구
@@ -355,7 +367,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:note-2026-11-19-월간콘텐츠방향성미팅오후@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:월간 콘텐츠 방향성 미팅 오후 2시
@@ -364,7 +376,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:note-2026-12-01-가족여행업로드쉬어가기@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261204
 SUMMARY:가족 여행 (업로드 쉬어 가기)
@@ -373,7 +385,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:note-2026-12-09-그래놀라공구정산미팅오전@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261209
 DTEND;VALUE=DATE:20261210
 SUMMARY:그래놀라 공구 정산 미팅 오전 11시
@@ -382,7 +394,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:note-2026-12-25-성탄절@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20261225
 DTEND;VALUE=DATE:20261226
 SUMMARY:성탄절
@@ -391,7 +403,7 @@ URL:https://trizcommerce.github.io/example/
 END:VEVENT
 BEGIN:VEVENT
 UID:note-2027-01-01-새해첫날@cal.trizcommerce
-DTSTAMP:20261125T060722Z
+DTSTAMP:20261125T062008Z
 DTSTART;VALUE=DATE:20270101
 DTEND;VALUE=DATE:20270102
 SUMMARY:새해 첫날
