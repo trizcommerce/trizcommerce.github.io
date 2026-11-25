@@ -1,0 +1,117 @@
+# 셀러 캘린더 통합 빌드 (2026-11-25~)
+# 코드는 조직 trizcommerce-team/<셀러> 에서 가져오고, 구글 시트는 '열쇠 없는 연결'(저장소 주인 = trizcommerce 만 허용)로 읽어
+# 원래 주소 https://trizcommerce.github.io/<셀러>/ 에 배포한다. 셀러 휴대폰의 바로가기·앱이 이 주소를 쓴다.
+# - 30분마다 전체, admin '지금 연동하기'·'최종 연동'은 repo 를 지정해 실행(나머지 셀러는 지금 배포된 것을 그대로 유지)
+# - 댓글 여론 '최종 연동' 결과(opinion.json)는 이 저장소 state/<셀러>/ 에 저장
+name: 셀러 캘린더 빌드
+
+on:
+  schedule:
+    - cron: "3,33 * * * *"
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: "셀러 저장소 이름 (비우면 전체)"
+        required: false
+        default: ""
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: [imxux9, duckduck0613, minjinchoa, paorang73, ___solvely___, berberlog, mija_uni, smitruti1010, shinyoung_h, hae.seoyoung]
+    env:
+      PYTHONUTF8: "1"
+      ON: ${{ github.event.inputs.repo == '' || github.event.inputs.repo == matrix.repo }}
+    steps:
+      - if: env.ON == 'true'
+        uses: actions/checkout@v4
+      - if: env.ON == 'true'
+        name: 셀러 코드 가져오기 (조직 저장소)
+        run: |
+          git clone --depth 1 "https://github.com/trizcommerce-team/${{ matrix.repo }}.git" work
+          if [ -f "state/${{ matrix.repo }}/opinion.json" ]; then cp "state/${{ matrix.repo }}/opinion.json" work/opinion.json; fi
+      - if: env.ON == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - if: env.ON == 'true'
+        run: pip install openpyxl pillow
+      - if: env.ON == 'true'
+        id: gauth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/764836683471/locations/global/workloadIdentityPools/github/providers/github-actions
+          service_account: calendar-reader@triz-calendar.iam.gserviceaccount.com
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/drive.readonly,https://www.googleapis.com/auth/spreadsheets.readonly
+          access_token_lifetime: 3600s
+          create_credentials_file: false
+      - if: env.ON == 'true'
+        name: 시트 받아서 앱 만들기
+        working-directory: work
+        env:
+          GOOGLE_TOKEN: ${{ steps.gauth.outputs.access_token }}
+          GITHUB_REPOSITORY: trizcommerce/${{ matrix.repo }}   # 달력 구독 주소를 원래 주소로
+        run: |
+          python build_app.py
+          python pwa_build.py
+      - if: env.ON == 'true'
+        name: 연동한 댓글 여론 저장 (admin '최종 연동')
+        run: |
+          mkdir -p "state/${{ matrix.repo }}"
+          if [ -f work/opinion.json ] && ! cmp -s work/opinion.json "state/${{ matrix.repo }}/opinion.json"; then
+            cp work/opinion.json "state/${{ matrix.repo }}/opinion.json"
+            git config user.name "github-actions"
+            git config user.email "github-actions@users.noreply.github.com"
+            git add "state/${{ matrix.repo }}/opinion.json"
+            git commit -m "댓글 여론 최종 연동 반영: ${{ matrix.repo }}"
+            for i in 1 2 3 4 5; do git pull --rebase -q origin main && git push -q && break; sleep $((i*3)); done
+          fi
+      - if: env.ON == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pwa-${{ matrix.repo }}
+          path: work/pwa
+          retention-days: 1
+
+  deploy:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pwa-*
+          path: parts
+      - name: 사이트 묶기 (이번에 안 만든 셀러는 지금 배포된 것 그대로)
+        run: python assemble.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: 업로드 처리 대기
+        run: sleep 15
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,21 @@
+# 보안 점검 2.7: GitHub 는 공개 저장소에 60일 동안 활동이 없으면 예약 실행(30분 자동 갱신)을 멈춘다.
+# 매달 1일·15일에 '살아 있음' 기록을 한 줄 남겨 자동 갱신이 멈추지 않게 한다.
+name: 자동 갱신 유지
+on:
+  schedule:
+    - cron: "17 3 1,15 * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .keepalive
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add .keepalive
+          git commit -m "자동 갱신 유지 기록" || exit 0
+          git pull --rebase origin main && git push

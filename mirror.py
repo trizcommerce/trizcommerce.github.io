@@ -1,7 +1,6 @@
-"""예전 주소(trizcommerce.github.io) 거울 사이트.
-2026-11-25 저장소를 조직 trizcommerce-team 으로 옮기면서 캘린더 주소가 바뀌었다.
-셀러 휴대폰에 깔린 예전 바로가기·앱이 그대로 열리도록, 새 주소의 배포 파일을 그대로 복사해 _site/ 에 만든다.
-파일 목록: 각 캘린더의 files.txt(빌드가 만듦). 아직 없으면 data.json 의 이미지 + 저장소의 downloads/ + 고정 파일로 대신 만든다."""
+"""배포된 캘린더 사이트를 그대로 복사하는 도구 (assemble.py 가 씀).
+파일 목록: 각 캘린더의 files.txt(빌드가 만듦). 없으면 data.json 의 이미지 + 저장소의 downloads/ + 고정 파일로 대신 만든다.
+python mirror.py 로 직접 실행하면 조직 주소 전체를 _site/ 로 복사한다(점검용)."""
 import json
 import re
 import sys
@@ -17,7 +16,6 @@ SELLERS = ["imxux9", "duckduck0613", "minjinchoa", "paorang73", "___solvely___",
            "mija_uni", "smitruti1010", "shinyoung_h", "hae.seoyoung"]
 FIXED = ["index.html", "manifest.webmanifest", "sw.js", "version.txt", "data.json", "config.json", "ideas.json",
          "opinion.json", "icon-180.png", "icon-192.png", "icon-512.png", "calendar.ics", "calendar-1d.ics", "calendar-3d.ics"]
-OUT = Path("_site")
 
 
 def get(url, ok404=False, tries=4):
@@ -41,24 +39,20 @@ def tree(repo):
     return [x["path"] for x in t["tree"] if x["type"] == "blob"]
 
 
-def seller_files(s):
-    lst = get(f"{NEW}/{s}/files.txt", ok404=True)
+def files_of(s, base):
+    lst = get(f"{base}/{s}/files.txt", ok404=True)
     if lst:
         return [l for l in lst.decode("utf-8").splitlines() if l.strip()]
-    data = get(f"{NEW}/{s}/data.json", ok404=True) or b""
+    data = get(f"{base}/{s}/data.json", ok404=True)
+    if data is None:
+        raise RuntimeError(f"{base}/{s} 에 캘린더가 없음")
     media = sorted(set(re.findall(rb"media/([0-9a-f]{16}\.jpg)", data)))
     dl = [p for p in tree(s) if p.startswith("downloads/")]
     extra = ["downloads/app.apk", "downloads/app.mobileconfig"] if dl else []
     return FIXED + [f"media/{m.decode()}" for m in media] + dl + extra
 
 
-def main():
-    jobs = []
-    for s in SELLERS:
-        jobs += [(f"{NEW}/{s}/{p}", OUT / s / p) for p in seller_files(s)]
-    # admin 은 저장소 그대로 배포됨(브랜치 배포) → 저장소 파일 전부
-    jobs += [(f"{NEW}/admin/{p}", OUT / "admin" / p) for p in tree("admin") if not p.startswith((".github/", "master/"))]
-
+def _download(jobs):
     def fetch(job):
         url, dest = job
         b = get(url, ok404=True)
@@ -67,18 +61,24 @@ def main():
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(b)
         return None
-
     with ThreadPoolExecutor(12) as ex:
-        missing = [m for m in ex.map(fetch, jobs) if m]
-    for f in ("index.html", "robots.txt"):
-        (OUT / f).write_bytes(Path(f).read_bytes())
-    print("copied", len(jobs) - len(missing), "missing", len(missing))
-    for m in missing[:30]:
-        print(" -", m)
-    # 핵심 파일(각 캘린더 index.html)이 빠지면 배포하지 않음 — 빈 사이트로 덮어쓰지 않게
-    core = [OUT / s / "index.html" for s in SELLERS + ["admin"]]
-    assert all(p.exists() and p.stat().st_size > 1000 for p in core), "핵심 파일 누락"
+        return [m for m in ex.map(fetch, jobs) if m]
+
+
+def copy_seller(s, base, dest):
+    missing = _download([(f"{base}/{s}/{p}", dest / p) for p in files_of(s, base)])
+    if not (dest / "index.html").exists():
+        raise RuntimeError(f"{s} index.html 없음")
+    return missing
+
+
+def copy_admin(dest):
+    return _download([(f"{NEW}/admin/{p}", dest / p) for p in tree("admin") if not p.startswith((".github/", "master/"))])
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    out = Path("_site")
+    for s in SELLERS:
+        print(s, "빠짐", copy_seller(s, NEW, out / s))
+    print("admin 빠짐", len(copy_admin(out / "admin")))
+    sys.exit(0)
