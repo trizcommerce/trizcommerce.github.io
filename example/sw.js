@@ -1,5 +1,5 @@
 // 화면은 항상 최신본을 먼저 받아오고(network-first), 오프라인일 때만 저장본을 보여준다.
-const CACHE = "duckduck-202611251533";
+const CACHE = "duckduck-202611251547";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-180.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
