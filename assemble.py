@@ -29,6 +29,7 @@ def main():
             mirror.copy_seller(s, mirror.NEW, OUT / s)
         copied.append(s)
     mirror.copy_admin(OUT / "admin")
+    shutil.copytree("example", OUT / "example")   # 미팅용 '예시' 캘린더(지어낸 내용, 시트 연동 없음) — 원본 example_calendar_app/
     for f in ("index.html", "robots.txt"):
         shutil.copy(f, OUT / f)
     print("새로 만듦:", built)
