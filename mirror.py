@@ -2,6 +2,7 @@
 파일 목록: 각 캘린더의 files.txt(빌드가 만듦). 없으면 data.json 의 이미지 + 저장소의 downloads/ + 고정 파일로 대신 만든다.
 python mirror.py 로 직접 실행하면 조직 주소 전체를 _site/ 로 복사한다(점검용)."""
 import json
+import os
 import re
 import sys
 import time
@@ -21,7 +22,10 @@ FIXED = ["index.html", "manifest.webmanifest", "sw.js", "version.txt", "data.jso
 def get(url, ok404=False, tries=4):
     for i in range(tries):
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "mirror"}), timeout=60) as r:
+            h = {"User-Agent": "mirror"}
+            if url.startswith("https://api.github.com/") and os.environ.get("GH_TOKEN"):   # 익명 API 한도(60회/시간) 회피
+                h["Authorization"] = "Bearer " + os.environ["GH_TOKEN"]
+            with urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=60) as r:
                 return r.read()
         except urllib.error.HTTPError as e:
             if ok404 and e.code == 404:

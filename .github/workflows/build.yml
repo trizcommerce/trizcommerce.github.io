@@ -106,6 +106,8 @@ jobs:
           pattern: pwa-*
           path: parts
       - name: 사이트 묶기 (이번에 안 만든 셀러는 지금 배포된 것 그대로)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python assemble.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
