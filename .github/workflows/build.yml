@@ -83,17 +83,6 @@ jobs:
           name: pwa-${{ matrix.repo }}
           path: work/pwa
           retention-days: 1
-      # 셀러 하나만 지정해 돌릴 때만: 받은 시트 원본(점검용, 하루 뒤 자동 삭제)
-      - if: github.event.inputs.repo == matrix.repo
-        uses: actions/upload-artifact@v4
-        with:
-          name: raw-${{ matrix.repo }}
-          path: |
-            work/tabs
-            work/*.xlsx
-            work/data.json
-          if-no-files-found: ignore
-          retention-days: 1
 
   deploy:
     needs: build
