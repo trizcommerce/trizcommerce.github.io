@@ -21,13 +21,17 @@ jobs:
           T: ${{ steps.gauth.outputs.access_token }}
         run: |
           mkdir out; S=1MTLBlWcl9DvJGwltiB1Ks1ugitJz8p6d7OcDlZ416WA
-          curl -sfL -H "Authorization: Bearer $T" "https://sheets.googleapis.com/v4/spreadsheets/$S?fields=sheets(properties(title,sheetId),conditionalFormats)" -o out/meta.json
-          curl -sfL -H "Authorization: Bearer $T" "https://docs.google.com/spreadsheets/d/$S/export?format=pdf&portrait=false&fitw=true" -o out/all.pdf
-          curl -sfL -H "Authorization: Bearer $T" "https://docs.google.com/spreadsheets/d/$S/export?format=xlsx" -o out/all.xlsx
-          for g in $(python3 -c "import json;print(' '.join(str(s['properties']['sheetId']) for s in json.load(open('out/meta.json'))['sheets']))"); do
-            curl -sfL -H "Authorization: Bearer $T" "https://docs.google.com/spreadsheets/d/$S/htmlview/sheet?headers=true&gid=$g" -o out/view_$g.html || true
+          curl -sL -w "%{http_code} %{url_effective}
+" -H "Authorization: Bearer $T" "https://sheets.googleapis.com/v4/spreadsheets/$S?fields=sheets.properties,sheets.conditionalFormats" -o out/meta.json
+          curl -sL -w "%{http_code} %{url_effective}
+" -H "Authorization: Bearer $T" "https://docs.google.com/spreadsheets/d/$S/export?format=pdf&portrait=false&fitw=true" -o out/all.pdf
+          curl -sL -w "%{http_code} %{url_effective}
+" -H "Authorization: Bearer $T" "https://docs.google.com/spreadsheets/d/$S/export?format=xlsx" -o out/all.xlsx
+          for g in $(python3 -c "import json;print(' '.join(str(s['properties']['sheetId']) for s in json.load(open('out/meta.json')).get('sheets',[])))"); do
+            curl -sL -w "%{http_code} %{url_effective}
+" -H "Authorization: Bearer $T" "https://docs.google.com/spreadsheets/d/$S/htmlview/sheet?headers=true&gid=$g" -o out/view_$g.html || true
           done
-          ls -la out
+          ls -la out; head -c 600 out/meta.json
       - uses: actions/upload-artifact@v4
         with:
           name: peek
